@@ -157,6 +157,87 @@ const Home = () => {
           />
         </div>
       </div>
+      <div className="products-we-deliver-wrapper">
+        <div className="products-we-deliver-main-content">
+          <div className="products-we-deliver-main">
+            <p className="title">Main Title</p>
+            <p className="subtitle">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s
+            </p>
+          </div>
+          <div className="products-we-deliver-main">
+            <p className="title">Main Title</p>
+            <p className="subtitle">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s
+            </p>
+          </div>
+          <div className="products-we-deliver-main">
+            <p className="title">Main Title</p>
+            <p className="subtitle">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s
+            </p>
+          </div>
+          <div className="products-we-deliver-main">
+            <p className="title">Main Title</p>
+            <p className="subtitle">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s
+            </p>
+          </div>
+        </div>
+        <div className="title-circle">
+          <p>Products we Deliver</p>
+          <img src="/assets/home/lamp.svg" alt="" />
+        </div>
+      </div>
+      <div className="documents-wrapper">
+        <p className="documents-title">Documents About the Platform</p>
+        <div className="document-download-main">
+          <div className="document-download">
+            <img src="/assets/home/book2.svg" alt="" className="book" />
+            <p>Document Title</p>
+            <img
+              src="/assets/home/download.svg"
+              alt=""
+              className="download-img"
+            />
+          </div>
+          <div className="document-download">
+            <img src="/assets/home/book2.svg" alt="" className="book" />
+            <p>Document Title</p>
+            <img
+              src="/assets/home/download.svg"
+              alt=""
+              className="download-img"
+            />
+          </div>
+          <div className="document-download">
+            <img src="/assets/home/book2.svg" alt="" className="book" />
+            <p>Document Title</p>
+            <img
+              src="/assets/home/download.svg"
+              alt=""
+              className="download-img"
+            />
+          </div>
+          <div className="document-download">
+            <img src="/assets/home/book2.svg" alt="" className="book" />
+            <p>Document Title</p>
+            <img
+              src="/assets/home/download.svg"
+              alt=""
+              className="download-img"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
