@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 // Define the schema using Zod
 const loginSchema = z.object({
-  phone: z.string().min(1, "Phone number is required"),
+  username: z.string().min(1, "Username is required"), // Updated to username
   password: z.string().min(1, "Password is required"),
 });
 
@@ -27,7 +27,7 @@ const StudentLogin: React.FC = () => {
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
-      const response = await studentLogin(data.phone, data.password);
+      const response = await studentLogin(data.username, data.password); // Updated to use username
       console.log("Login successful:", response);
       navigate("/exams");
     } catch (error: any) {
@@ -61,19 +61,19 @@ const StudentLogin: React.FC = () => {
             </div>
           )}
           <div className="mb-4">
-            <label htmlFor="phone" className="block text-gray-700 mb-1">
-              Phone Number
+            <label htmlFor="username" className="block text-gray-700 mb-1">
+              Username
             </label>
             <input
               type="text"
-              id="phone"
+              id="username"
               className="w-full h-[57px] p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="Enter your phone number"
-              {...register("phone")}
+              placeholder="Enter your username"
+              {...register("username")}
             />
-            {errors.phone && (
+            {errors.username && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.phone.message}
+                {errors.username.message}
               </p>
             )}
           </div>

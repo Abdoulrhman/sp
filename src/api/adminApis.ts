@@ -1,11 +1,11 @@
 import apiInstance from "./axiosInstance";
 
 // Login function
-export const studentLogin = async (phone: string, password: string) => {
+export const studentLogin = async (username: string, password: string) => {
   try {
     const response = await apiInstance.post("/Account/StudentLogin", {
-      phone,
-      password,
+      UserName: username, // Updated key from phone to UserName
+      Password: password,
     });
 
     // Assuming the token is returned in the response data under "token"
