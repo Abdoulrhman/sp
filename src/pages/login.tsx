@@ -29,7 +29,7 @@ const StudentLogin: React.FC = () => {
     try {
       const response = await studentLogin(data.username, data.password); // Updated to use username
       console.log("Login successful:", response);
-      navigate("/exams");
+      navigate("/assessments");
     } catch (error: any) {
       console.error("Login failed:", error);
       setLoginError(

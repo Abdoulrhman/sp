@@ -24,7 +24,7 @@ const Home = () => {
         gap-4
         "
         >
-          <button className="login-btn" onClick={() => router("/login")}>
+          <button className="login-btn" onClick={() => router("/pre-login")}>
             Login
           </button>
 
