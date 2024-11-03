@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const PreLogin: React.FC = () => {
-  const [selectedItem, setSelectedItem] = useState<string | null>("Students");
+  const [selectedItem, setSelectedItem] = useState<string | null>("Student");
   const navigation = useNavigate();
 
   const handleSelect = (item: string) => {
@@ -24,17 +24,17 @@ const PreLogin: React.FC = () => {
         </p>
         <div className="flex justify-center gap-8">
           <div
-            onClick={() => handleSelect("Students")}
+            onClick={() => handleSelect("Student")}
             className={`flex flex-col items-center w-40 h-48 bg-gray-100 border-2 rounded-lg p-4 cursor-pointer ${
-              selectedItem === "Students" ? "border-purple-500" : "border-gray-300"
+              selectedItem === "Student" ? "border-purple-500" : "border-gray-300"
             }`}
           >
             <img
               src="/assets/login/students.png" // Replace with actual image source
-              alt="Students"
+              alt="Student"
               className="mb-4"
             />
-            <h3 className="text-lg font-medium text-gray-700">Students</h3>
+            <h3 className="text-lg font-medium text-gray-700">Student</h3>
           </div>
           <div
             onClick={() => handleSelect("Schools")}

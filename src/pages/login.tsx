@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { studentLogin } from "../api/adminApis";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 // Define the schema using Zod
 const loginSchema = z.object({
-  username: z.string().min(1, "Username is required"), // Updated to username
+  username: z.string().min(1, "Username is required"),
   password: z.string().min(1, "Password is required"),
 });
 
@@ -23,18 +23,23 @@ const StudentLogin: React.FC = () => {
   });
 
   const navigate = useNavigate();
-  const [loginError, setLoginError] = useState<string | null>(null); // State to store login error message
+  const location = useLocation();
+  const [loginError, setLoginError] = useState<string | null>(null);
+
+  // Extract role from URL query parameters
+  const queryParams = new URLSearchParams(location.search);
+  const role = queryParams.get("role") || "student"; // Default to "student" if role is not specified
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
-      const response = await studentLogin(data.username, data.password); // Updated to use username
+      const response = await studentLogin(data.username, data.password);
       console.log("Login successful:", response);
       navigate("/assessments");
     } catch (error: any) {
       console.error("Login failed:", error);
       setLoginError(
         error.response?.data?.message || "Login failed. Please try again."
-      ); // Set error message
+      );
     }
   };
 
@@ -51,7 +56,7 @@ const StudentLogin: React.FC = () => {
 
       {/* Right Side: Login Form */}
       <div className="w-full md:w-1/2 flex flex-col justify-center p-8">
-        <h2 className="text-2xl font-semibold mb-4">Login as a student</h2>
+        <h2 className="text-2xl font-semibold mb-4">Login as a {role}</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
           {/* Display login error message */}
