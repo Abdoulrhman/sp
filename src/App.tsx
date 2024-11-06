@@ -7,6 +7,7 @@ import Exams from "./pages/exams";
 import Assessments from "./pages/assessments";
 import AssessmentsDetails from "./pages/assessments-details";
 import PreLogin from "./pages/pre-login";
+import Questions from "./pages/questions";
 
 const App = () => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
         <Route path="/assessments" element={<Assessments />} />
         <Route path="/details" element={<AssessmentsDetails />} />
         <Route path="/pre-login" element={<PreLogin />} />
-
+        <Route path="/questions" element={<Questions />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
