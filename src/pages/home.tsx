@@ -1,36 +1,40 @@
 import { useNavigate } from "react-router-dom";
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
-
+import Footer from "../layout/footer";
+import Header from "../layout/header";
 
 const Home = () => {
   const router = useNavigate();
   return (
     <div className="home-wrapper">
-      <div className="home-header">
-        <ul>
-          <li>
-            <a href="/about">Home</a>
-          </li>
-          <li>
-            <a href="/about">About</a>
-          </li>
-          <li>
-            <a href="/about">Contact Us</a>
-          </li>
-        </ul>
-        <div
-          className="
+      <Header
+        leftChildren={
+          <ul>
+            <li>
+              <a href="/about">Home</a>
+            </li>
+            <li>
+              <a href="/about">About</a>
+            </li>
+            <li>
+              <a href="/about">Contact Us</a>
+            </li>
+          </ul>
+        }
+        rightChildren={
+          <div
+            className="
         flex
         gap-4
         "
-        >
-          <button className="login-btn" onClick={() => router("/pre-login")}>
-            Login
-          </button>
+          >
+            <button className="login-btn" onClick={() => router("/pre-login")}>
+              Login
+            </button>
 
-          <div className="header-circle"></div>
-        </div>
-      </div>
+            <div className="header-circle"></div>
+          </div>
+        }
+      />
 
       <div className="our-platform">
         <div className="left">
@@ -238,35 +242,10 @@ const Home = () => {
               className="download-img"
             />
           </div>
-
         </div>
       </div>
 
-      <footer className="footer-wrapper">
-      {/* Left Section - Links */}
-      <div>
-        <div className="footer-links">
-          <p>Home</p>
-          <p>Why !</p>
-          <p>What we do ?</p>
-          <p>Contact</p>
-          <p>Privacy Policy</p>
-        </div>
-
-        {/* Social Media Icons */}
-        <div className="social-icons">
-          <FaFacebook />
-          <FaInstagram />
-          <FaTwitter />
-        </div>
-      </div>
-
-      {/* Right Section - Subscription */}
-      <div className="subscribe-section">
-        <input type="email" placeholder="Your Email" />
-        <button className="subscribe-btn">Subscribe</button>
-      </div>
-    </footer>
+      <Footer />
     </div>
   );
 };
