@@ -6,6 +6,7 @@ import StudentLogin from "./pages/login";
 import Exams from "./pages/exams";
 import Assessments from "./pages/assessments";
 import AssessmentsDetails from "./pages/assessments-details";
+import Questions from "./pages/questions";
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
         <Route path="/login" element={<StudentLogin />} />
         <Route path="/assessments" element={<Assessments />} />
         <Route path="/details" element={<AssessmentsDetails />} />
-
+        <Route path="/questions" element={<Questions />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
