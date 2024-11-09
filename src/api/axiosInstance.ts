@@ -17,7 +17,7 @@ apiInstance.interceptors.request.use(
 
     if (token) {
       // Add Authorization header to the request
-      config.headers.Authorization = `${token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
