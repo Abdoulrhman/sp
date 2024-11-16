@@ -8,6 +8,7 @@ import Assessments from "./pages/assessments";
 import AssessmentsDetails from "./pages/assessments-details";
 import PreLogin from "./pages/pre-login";
 import Questions from "./pages/questions";
+import { StudentFilePage } from "./pages/school-admin-view";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/exams" element={<Exams />} />
         <Route path="/login" element={<StudentLogin />} />
+        <Route path="/students-files" element={<StudentFilePage />} />
         <Route path="/assessments" element={<Assessments />} />
         <Route path="/details" element={<AssessmentsDetails />} />
         <Route path="/pre-login" element={<PreLogin />} />

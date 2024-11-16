@@ -10,7 +10,7 @@ const Home = () => {
         leftChildren={
           <ul>
             <li>
-              <a href="/about">Home</a>
+              <a href="/">Home</a>
             </li>
             <li>
               <a href="/about">About</a>
