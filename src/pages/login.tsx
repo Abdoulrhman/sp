@@ -72,7 +72,10 @@ const StudentLogin: React.FC = () => {
         gap-4
         "
           >
-            <button className="login-btn" onClick={() => router("/pre-login")}>
+            <button
+              className="login-btn"
+              onClick={() => navigate("/pre-login")}
+            >
               Login
             </button>
 

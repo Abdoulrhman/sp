@@ -159,7 +159,7 @@ export function StudentFilePage() {
       </main>
 
       {/* Footer */}
-      <Footer className="mt-auto" />
+      <Footer />
     </div>
   );
 }

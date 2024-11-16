@@ -35,7 +35,10 @@ const PreLogin: React.FC = () => {
         gap-4
         "
           >
-            <button className="login-btn" onClick={() => router("/pre-login")}>
+            <button
+              className="login-btn"
+              onClick={() => navigation("/pre-login")}
+            >
               Login
             </button>
 
