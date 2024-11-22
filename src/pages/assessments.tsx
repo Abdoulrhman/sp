@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../layout/footer";
@@ -15,11 +14,11 @@ const Assessments: React.FC = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const examData = await getStudentExams();
-        if (Array.isArray(examData) && examData.length > 0) {
-          setExams(examData);
+        const response = await getStudentExams();
+        if (response?.StatusCode === 200 && Array.isArray(response.Data)) {
+          setExams(response.Data); // Access the "Data" property of the response
         } else {
-          setExams([]); // Set exams to an empty array if no data is returned
+          setExams([]); // Set exams to an empty array if no valid data is returned
         }
       } catch (err: any) {
         setError(err.message || "Failed to load exams");
@@ -31,10 +30,11 @@ const Assessments: React.FC = () => {
     fetchExams();
   }, []);
 
-  const handleCardClick = (examId: string) => {
-    navigate(`/details/${examId}`);
+  const handleCardClick = (examId: string, title: string) => {
+    navigate(`/details/${examId}`, {
+      state: { title }, // Pass the title to the next page
+    });
   };
-
   return (
     <>
       <div className="assessment-wrapper h-[100vh]">
@@ -53,8 +53,15 @@ const Assessments: React.FC = () => {
                 <div className="img-wrapper">
                   <img src="/assets/assessment/assess.svg" alt="Assessment" />
                 </div>
-                <p>{exam.title || "Assessment Title"}</p>
-                <button onClick={() => handleCardClick(exam.instance)}>
+                <p>{exam.TitleEn || "Assessment Title"}</p>
+                <button
+                  onClick={() =>
+                    handleCardClick(
+                      exam.ExamId,
+                      exam.TitleEn || "Assessment Title"
+                    )
+                  }
+                >
                   View Details
                 </button>
               </div>

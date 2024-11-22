@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Header from "../layout/header";
 import Footer from "../layout/footer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { checkSkillsExamsAvailability } from "../api/adminApis";
 
 const AssessmentsDetails: React.FC = () => {
   const [availability, setAvailability] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const location = useLocation();
+  const { title } = location.state || {};
 
   const navigate = useNavigate();
 
@@ -33,9 +35,9 @@ const AssessmentsDetails: React.FC = () => {
 
   return (
     <div className="mt-5">
-      <Header leftChildren={<p>Available Assessments</p>} />
+      <Header leftChildren={<p>{title || "Available Assessments"}</p>} />{" "}
       <div className="assessments-details-wrapper">
-        <p className="title-assessment">Title About Assessment</p>
+        <p className="title-assessment">{title || "Assessment Title"}</p>
         <div className="details-main">
           <div className="left-side">
             <img src="/assets/assessment/green-arrow.svg" alt="Assessment" />
