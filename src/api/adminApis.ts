@@ -21,6 +21,27 @@ export const studentLogin = async (username: string, password: string) => {
     throw error.response ? error.response.data : new Error("Login failed");
   }
 };
+export const adminSchoolLogin = async (username: string, password: string) => {
+  try {
+    const response = await apiInstance.post("/Account/AdminSchoolLogin", {
+      UserName: username, // Updated key to UserName
+      Password: password,
+    });
+
+    // Assuming the token is returned in the response data under "token"
+    const { token } = response.data.Data;
+
+    // Store the token in localStorage
+    if (token) {
+      localStorage.setItem("token", token);
+    }
+
+    return response.data; // Assuming the response contains user data or token
+  } catch (error: any) {
+    throw error.response ? error.response.data : new Error("Login failed");
+  }
+};
+
 export const getStudentExams = async () => {
   try {
     const response = await apiInstance.get("/Exam/GetStudentExams");

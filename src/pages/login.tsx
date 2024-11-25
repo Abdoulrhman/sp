@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { studentLogin } from "../api/adminApis";
+import { adminSchoolLogin, studentLogin } from "../api/adminApis";
 import { useNavigate, useLocation } from "react-router-dom";
 import Footer from "../layout/footer";
 import Header from "../layout/header";
@@ -34,7 +34,10 @@ const StudentLogin: React.FC = () => {
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
-      const response = await studentLogin(data.username, data.password);
+      const response =
+        role === "Student"
+          ? await studentLogin(data.username, data.password)
+          : await adminSchoolLogin(data.username, data.password);
       console.log("Login successful:", response);
       if (role === "Student") {
         navigate("/assessments");
