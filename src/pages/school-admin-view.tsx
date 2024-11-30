@@ -1,23 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { useSchoolSearch } from "../hooks/useSchoolSearch";
+import { useGradeSearch } from "../hooks/useGradesSearch";
 import { downloadStudentsFile } from "../api/adminApis";
 import Header from "../layout/header";
 import Footer from "../layout/footer";
-import { useGradeSearch } from "../hooks/useGradesSearch";
 
 export function StudentFilePage() {
   const methods = useForm(); // Use React Hook Form's `useForm`
-  const { watch } = methods;
+  const { watch, setValue } = methods;
   const [isStudentFileDownloading, setIsStudentFileDownloading] =
     useState(false);
-
-  // Fetch schools using hook
-  const {
-    schools,
-    isLoading: isLoadingSchools,
-    error: schoolError,
-  } = useSchoolSearch();
+  const [schoolId, setSchoolId] = useState<string | null>(null); // State to hold SchoolId
 
   // Fetch grades using hook
   const {
@@ -26,21 +19,33 @@ export function StudentFilePage() {
     error: gradeError,
   } = useGradeSearch();
 
+  // Get SchoolId from localStorage's user object
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    setSchoolId(user.SchoolId || null); // Set SchoolId state
+    if (user.SchoolId) {
+      setValue("schoolId", user.SchoolId); // Set SchoolId in the form
+    }
+  }, [setValue]);
+
   const selectedGrade = watch("gradeId");
-  const selectedSchool = watch("schoolId");
 
   // Handle student file download
   const handleStudentFileDownload = async (event: React.FormEvent) => {
     event.preventDefault(); // Prevent form submission
 
-    if (!selectedSchool || !selectedGrade) {
-      alert("Please select a school and grade before downloading.");
+    if (!schoolId || !selectedGrade) {
+      alert(
+        schoolId
+          ? "Please select a grade before downloading."
+          : "You don't have an assigned school. Please contact your administrator."
+      );
       return;
     }
 
     setIsStudentFileDownloading(true);
     try {
-      await downloadStudentsFile(selectedGrade, selectedSchool); // Download API call
+      await downloadStudentsFile(selectedGrade, schoolId); // Download API call
       alert("Student file downloaded successfully!");
     } catch (error) {
       console.error("Error downloading student file:", error);
@@ -81,7 +86,7 @@ export function StudentFilePage() {
             onSubmit={handleStudentFileDownload}
             className="container mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            {/* Column 1: Select School and Grade */}
+            {/* Column 1: Select Grade */}
             <div className="space-y-4">
               <h2 className="text-xl font-bold">Select Filters</h2>
 
@@ -111,29 +116,23 @@ export function StudentFilePage() {
                 )}
               </div>
 
-              {/* School Dropdown */}
+              {/* School */}
               <div className="space-y-1">
                 <label htmlFor="school" className="block text-sm font-medium">
                   School
                 </label>
-                <select
-                  id="school"
-                  {...methods.register("schoolId")}
-                  className="w-full border rounded p-2 bg-gray-100"
-                  disabled={isLoadingSchools}
-                >
-                  <option value="">Select school</option>
-                  {schools.map((school) => (
-                    <option key={school.Id} value={school.Id}>
-                      {school.NameEn}
-                    </option>
-                  ))}
-                </select>
-                {isLoadingSchools && (
-                  <p className="text-sm text-gray-500">Loading schools...</p>
-                )}
-                {schoolError && (
-                  <p className="text-sm text-red-500">{schoolError}</p>
+                {schoolId ? (
+                  <input
+                    id="school"
+                    value={schoolId}
+                    readOnly
+                    className="w-full border rounded p-2 bg-gray-100 cursor-not-allowed"
+                  />
+                ) : (
+                  <p className="text-sm text-red-500">
+                    You don't have an assigned school. Please contact your
+                    administrator.
+                  </p>
                 )}
               </div>
 
@@ -141,12 +140,12 @@ export function StudentFilePage() {
               <button
                 type="submit"
                 className={`w-full py-2 px-4 rounded text-white ${
-                  isStudentFileDownloading || !selectedGrade || !selectedSchool
+                  isStudentFileDownloading || !selectedGrade || !schoolId
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-[#a883f3] hover:bg-purple-500"
                 }`}
                 disabled={
-                  isStudentFileDownloading || !selectedGrade || !selectedSchool
+                  isStudentFileDownloading || !selectedGrade || !schoolId
                 }
               >
                 {isStudentFileDownloading
