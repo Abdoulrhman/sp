@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import Footer from "../layout/footer";
 import Header from "../layout/header";
 
@@ -118,6 +118,12 @@ const Questions: React.FC = () => {
     event.preventDefault();
   };
 
+  const [text, setText] = useState<string>("");
+
+  const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+    setText(event.target.value);
+  };
+
   return (
     <div className="mt-5">
       <Header />
@@ -149,6 +155,16 @@ const Questions: React.FC = () => {
                 <img src="/assets/home/reading-a-book.svg" alt="" />
               </div>
             </div>
+            <div className="extra-writing-instruction">
+              <div className="instruction-item">
+                <img src="/assets/exams/keyboard.svg" alt="" />
+                <p className="keyboard">Write with Keyboard</p>
+              </div>
+              <div className="instruction-item">
+                <img src="/assets/exams/write.svg" alt="" />
+                <p>Hand writing</p>
+              </div>
+            </div>
           </div>
         </div>
         <div className="reading-timer">
@@ -177,28 +193,55 @@ const Questions: React.FC = () => {
               </p>
             </div>
             <div className="choose-the-correct-answer">
-              <p className="section-title">choose the correct answer</p>
+              <p className="section-title">
+                <span className="question-num">1</span>
+                choose the correct answer
+              </p>
               <div className="choose-questions">
                 <div className="question-item">
-                  <p className="question">Question Title</p>
+                  <p className="question">
+                    <span className="question-letter">A</span>Question Title
+                  </p>
                   <div className="answers">
-                    <p>answer 1</p>
-                    <p>answer 1</p>
-                    <p>answer 1</p>
+                    <label>
+                      <input type="radio" name="Q1" value="answer1" />
+                      answer 1
+                    </label>
+                    <label>
+                      <input type="radio" name="Q1" value="answer2" />
+                      answer 2
+                    </label>
+                    <label>
+                      <input type="radio" name="Q1" value="answer3" />
+                      answer 3
+                    </label>
                   </div>
                 </div>
                 <div className="question-item">
-                  <p className="question">Question Title</p>
+                  <p className="question">
+                    <span className="question-letter">B</span>Question Title
+                  </p>
                   <div className="answers">
-                    <p>answer 1</p>
-                    <p>answer 1</p>
-                    <p>answer 1</p>
+                    <label>
+                      <input type="radio" name="Q2" value="answer1" />
+                      answer 1
+                    </label>
+                    <label>
+                      <input type="radio" name="Q2" value="answer2" />
+                      answer 2
+                    </label>
+                    <label>
+                      <input type="radio" name="Q2" value="answer3" />
+                      answer 3
+                    </label>
                   </div>
                 </div>
               </div>
             </div>
             <div className="true-or-false">
-              <p className="section-title">True or false ?</p>
+              <p className="section-title">
+                <span className="question-num">2</span>True or false ?
+              </p>
               <div className="true-or-false-question">
                 <p className="question">
                   Lorem Ipsum is simply dummy text of the printing and
@@ -210,13 +253,22 @@ const Questions: React.FC = () => {
                   essentially unchanged. 
                 </p>
                 <div className="true-or-false-answer">
-                  <p className="true">True</p>
-                  <p className="false">False</p>
+                  <label className="true">
+                    <input type="radio" name="trueOrFalse" value="true" />
+                    True
+                  </label>
+                  <label className="false">
+                    <input type="radio" name="trueOrFalse" value="false" />
+                    False
+                  </label>
                 </div>
               </div>
             </div>
             <div className="put-in-right-place">
-              <p className="section-title">Put words in right places</p>
+              <p className="section-title">
+                {" "}
+                <span className="question-num">3</span>Put words in right places
+              </p>
               <div className="put-in-right-place-questions">
                 <div
                   className="words-to-choose"
@@ -257,7 +309,11 @@ const Questions: React.FC = () => {
               </div>
             </div>
             <div className="arrange-words">
-              <p className="section-title">Drag and Drop to Arrange Words</p>
+              <p className="section-title">
+                {" "}
+                <span className="question-num">4</span>Drag and Drop to Arrange
+                Words
+              </p>
               <div className="arrange-words-question">
                 <div
                   className="words-to-arrange"
@@ -303,6 +359,48 @@ const Questions: React.FC = () => {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="txt-area-question">
+          <p className="topic-num">Topic 3</p>
+          <div className="topic-question">
+            <p className="question-title">Question Title</p>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. 
+            </p>
+            <div className="answer-area">
+              <textarea className="answer-textarea"></textarea>
+            </div>
+          </div>
+        </div>
+        <div className="submit-and-move">
+          <div></div>
+          <button>Submit</button>
+          <div className="next-arrow">
+            <img src="/assets/assessment/next-arrow.svg" alt="" />
+          </div>
+        </div>
+        <div className="write-about-wrapper">
+          <div className="img-wrapper">
+            <img src="/assets/exams/school.svg" alt="" />
+          </div>
+
+          <p className="about-title">Write About Your School</p>
+          <div className="writing-area-container">
+            <textarea
+              className="writing-area"
+              value={text}
+              onChange={handleTextChange}
+              maxLength={200}
+            />
+            <div className={`count ${text.length >= 180 ? "warning" : ""}`}>
+              {text.length} / 200
             </div>
           </div>
         </div>
